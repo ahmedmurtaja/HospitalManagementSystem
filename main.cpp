@@ -8,8 +8,6 @@
 
 using namespace std;
 
-// Define a struct to store patient details
-// نستخدم الدالة struct لتخزين بيانات المريض
 struct patient
 {
     int id;
@@ -18,8 +16,6 @@ struct patient
     string phone;
     int age;
 };
-// Define a struct to store physician details
-// نستخدم الدالة struct لتخزين بيانات الطبيب
 struct physician
 {
     int id;
@@ -29,7 +25,6 @@ struct physician
     string phone;
 };
 // Define a struct to store schedule details
-// نستخدم الدالة struct لتخزين بيانات المواعيد
 struct Schedule
 {
     int id;
@@ -39,38 +34,26 @@ struct Schedule
     int patientID;
 };
 // Declare an object of the struct patient
-// نعرف أوبجكت من نوع الدالة struct patient لاستخدامه في البرنامج
 patient newPatient;
 // Declare an object of the struct physician
-// نعرف أوبجكت من نوع الدالة struct physician لاستخدامه في البرنامج
 physician newPhysician;
 // Declare an object of the struct schedule
-// نعرف أوبجكت من نوع الدالة struct schedule لاستخدامه في البرنامج
 Schedule newSchedule;
 
 // Define a method to add a new physician to the file
 // نستخدم الدالة لاضافة طبيب جديد الى الملف
-// نستخدم الدالة ofstream لكتابة البيانات الى الملف
-// نستخدم الدالة ios::app للتأكد من اضافة البيانات الى نهاية الملف
-// نقوم بإنشاء ملف لتخزين بيانات الطبيب ونسميه physicians.txt
+
 void addPhysicianToFile(physician &newPhysician)
 {
-    // Declare an object of the class ofstream
-    // نعرف أوبجكت من نوع الدالة ofstream لاستخدامه في البرنامج
-    // نستخدم الدالة ofstream لكتابة البيانات الى الملف
     ofstream outFile;
     // Open the file in append mode
-    // نستخدم الدالة ios::app للتأكد من اضافة البيانات الى نهاية الملف
-    // نستخدم الدالة open لفتح الملف
     outFile.open("physicians.txt", ios::app); // open the file in append mode
 
     // Check if the file is open
-    // نستخدم الدالة is_open للتأكد من فتح الملف بشكل صحيح
     if (outFile.is_open())
     {
         // write the physician details to the file
         // out file used to write to the file
-        // نستخدم الدالة outFile لكتابة البيانات الى الملف
         outFile << newPhysician.id << endl;
         outFile << newPhysician.name << endl;
         outFile << newPhysician.specialization << endl;
@@ -86,8 +69,6 @@ void addPhysicianToFile(physician &newPhysician)
 }
 
 // Define a method to add a new patient to the file
-// نستخدم الدالة لاضافة مريض جديد الى الملف
-// نستخدم الدالة ofstream لكتابة البيانات الى الملف
 void addPatientToFile(patient &newPatient)
 {
     ofstream outFile;
@@ -110,20 +91,12 @@ void addPatientToFile(patient &newPatient)
 }
 
 // Define a method to check if the patient exists in the file
-// نستخدم الدالة للتأكد من وجود المريض في الملف
-// نستخدم الدالة ifstream لقراءة البيانات من الملف
-// نستخدم الدالة is_open للتأكد من فتح الملف بشكل صحيح
-// نستخدم الدالة close لغلق الملف بعد الانتهاء من القراءة منه
 
 bool isPatientExist(int patientID)
 {
-    // Declare an object of the class ifstream
-    // نعرف أوبجكت من نوع الدالة ifstream لاستخدامه في البرنامج
-    // نستخدم الدالة ifstream لقراءة البيانات من الملف
-    //
+    // Declare an object of the class ifstreة
     ifstream inputFile("patients.txt");
-    // Check if the file is open
-    // نستخدم الدالة is_open للتأكد من فتح الملف بشكل صحيح
+    // Check if the file is ope
     if (!inputFile.is_open())
     {
         cout << "Error opening file." << endl;
@@ -131,11 +104,7 @@ bool isPatientExist(int patientID)
     }
 
     // Read the file line by line
-    // نقوم بقراءة الملف سطر بسطر
-    // declare variables to store the patient details
-    // نعرف متغيرات لتخزين بيانات المريض
-    // نقوم بقراءة البيانات من الملف ونخزنها في المتغيرات
-    // نقوم بالتأكد من وجود المريض في الملف
+    
     int id;
     string name;
     string address;
@@ -151,12 +120,9 @@ bool isPatientExist(int patientID)
             return true;
         }
     }
-    // نقوم بغلق الملف بعد الانتهاء من القراءة منه
-    // نستخدم الدالة close لغلق الملف بعد الانتهاء من القراءة منه
 
     inputFile.close();
 
-    // نقوم بإرجاع القيمة false للدالة في حالة عدم وجود المريض في الملف
     return false;
 }
 
@@ -215,10 +181,8 @@ void displayPatients()
 }
 
 // Define a method to display the list of physicians
-// نستخدم الدالة لعرض قائمة الاطباء
 void displayPhysicians()
 {
-    // نستخدم الدالة ifstream لقراءة البيانات من الملف
     ifstream inputFile("physicians.txt");
     int id;
     string name;
@@ -228,7 +192,6 @@ void displayPhysicians()
 
     while (inputFile >> id >> name >> specialization >> department >> phone)
     {
-        // طباعة بيانات الطبيب  
         cout << "Physician ID: " << id << endl;
         cout << "Physician name: " << name << endl;
         cout << "Physician specialization: " << specialization << endl;
@@ -236,33 +199,27 @@ void displayPhysicians()
         cout << "Physician phone: " << phone << endl;
         cout << "-----------------" << endl;
     }
- // نستخدم الدالة close لغلق الملف بعد الانتهاء من القراءة منه  
 
     inputFile.close();
 }
 
 // Define a method to edit a patient record
-// نستخدم الدالة لتعديل بيانات المريض
 
 void editPatientRecord(int patientID)
 {
     // Check if the patient exists in the file
-    // نستخدم الدالة للتأكد من وجود المريض في الملف
     if (!isPatientExist(patientID))
     {
         cout << "Patient not found." << endl;
         return;
     }
     // ifstream is used to read data from the file
-    // نستخدم الدالة ifstream لقراءة البيانات من الملف
     ifstream inputFile("patients.txt");
     if (!inputFile.is_open())
     {
         cout << "Error opening file." << endl;
         return;
     }
-// نعرف متغيرات لتخزين بيانات المريض
-    // نقوم بقراءة البيانات من الملف ونخزنها في المتغيرات
 
     int id;
     string name;
@@ -271,7 +228,6 @@ void editPatientRecord(int patientID)
     int age;
 
     // Create a vector to store the patients
-    // نستخدم الدالة vector لتخزين بيانات المرضى
     vector<patient> patients;
 
     while (inputFile >> id >> name >> address >> phone >> age)
@@ -306,8 +262,6 @@ void editPatientRecord(int patientID)
         cout << "Error opening file." << endl;
         return;
     }
-// نستخدم الدالة size لعرض حجم المتغير  
-// نستخدم الدالة push_back لإضافة بيانات المريض الجديدة
 
     for (int i = 0; i < patients.size(); i++)
     {
@@ -322,11 +276,9 @@ void editPatientRecord(int patientID)
 }
 
 // Define a method to edit a physician record
-// نستخدم الدالة لتعديل بيانات الطبيب
 void editPhysicianRecord(int physicianID)
 {
     // Check if the physician exists in the file
-    // نستخدم الدالة للتأكد من وجود الطبيب في الملف 
     if (!isPhysicianExist(physicianID))
     {
         cout << "Physician not found." << endl;
@@ -334,7 +286,6 @@ void editPhysicianRecord(int physicianID)
     }
 
     // ifstream is used to read data from the file
-    // نستخدم الدالة ifstream لقراءة البيانات من الملف
 
 
     ifstream inputFile("physicians.txt");
@@ -398,7 +349,6 @@ void editPhysicianRecord(int physicianID)
 }
 
 // Define a method to delete a patient record
-// نستخدم الدالة لحذف بيانات المريض
 void deletePatientRecord(int patientID)
 {
     ifstream inputFile("patients.txt");
@@ -408,11 +358,7 @@ void deletePatientRecord(int patientID)
         return;
     }
 // to delete a patient record we need to read all the records from the file
-// ولحذف بيانات المريض نقوم بقراءة جميع البيانات من الملف
-// and write all the records except the record we want to delete
-// ونكتب جميع البيانات في الملف ما عدا البيانات التي نريد حذفها
-// نعرف متغيرات لتخزين بيانات المريض
-// نقوم بقراءة البيانات من الملف ونخزنها في المتغيرات   
+
 
 
     int id;
@@ -460,7 +406,6 @@ void deletePatientRecord(int patientID)
 }
 
 // Define a method to display schedule
-// نستخدم الدالة لعرض جدول المواعيد
 void displaySchedule()
 {
     ifstream inputFile("schedule.txt");
@@ -490,7 +435,6 @@ void displaySchedule()
 }
 
 // Define a method to delete a physician record
-// نستخدم الدالة لحذف بيانات الطبيب
 void deletePhysicianRecord(int physicianID)
 {
     ifstream inputFile("physicians.txt");
@@ -545,9 +489,6 @@ void deletePhysicianRecord(int physicianID)
 }
 
 // Define a method to Add new schedule
-// نستخدم الدالة لاضافة جدول جديد
-// نستخدم الدالة ofstream لكتابة البيانات الى الملف
-
 void addScheduleToFile(Schedule &newSchedule)
 {
     ofstream outFile;
@@ -594,7 +535,6 @@ string getPhysicianNameById(int id)
 }
 
 // Define a method to display the list of schedules
-// نستخدم الدالة لعرض قائمة الجداول
 void displaySchedulesForPhyscians()
 {
     ifstream inputFile("schedules.txt");
@@ -633,7 +573,6 @@ void displaySchedulesForPhyscians()
 }
 
 // Define a method to delete a schedule
-// نستخدم الدالة لحذف جدول معين
 
 void deleteSchedule()
 {
@@ -765,8 +704,6 @@ int main()
     // Ask user for option and store in variable option
     // Use switch statement to execute code based on option
     // Use do-while loop to repeat menu until user chooses to exit
-    // نستخدم الدالة do-while لتكرار القائمة حتى يختار المستخدم الخروج من البرنامج
-    // نستخدم الدالة switch لتنفيذ الكود المختلف حسب الخيار الذي اختاره المستخدم
     int option;
     int appointmentId;
     int patientId;
